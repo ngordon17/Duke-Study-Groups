@@ -25,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
     [self setNeedsStatusBarAppearanceUpdate];
     _myEmail.delegate = self;
     _myPassword.delegate = self;
@@ -67,7 +68,9 @@
     @try {
         //TODO: check to see if email is duke.edu
         if ([_myEmail.text isEqualToString:@""] || [_myPassword.text isEqualToString:@""]) {
-            [self alertStatus:@"Please enter email and password!" :@"Login Failed!"];
+            
+
+             [self alertStatus:@"Please enter email and password!" :@"Login Failed!"];
         }
         else {
             NSString *post = [[NSString alloc] initWithFormat:@"username=%@&password=%@", _myEmail.text, _myPassword.text];
@@ -101,7 +104,9 @@
                 if (success == 1) {
                     NSLog(@"Login successful!"); //DEBUG
                     [self alertStatus:@"Logged in successfully." : @"Login sucess!"];
-                    //TODO: REDIRECT!
+                    //TODO: REDIRECT with user data!
+                    [self performSegueWithIdentifier:@"loginSegue" sender:self];
+                   
                 }
                 else {
                     NSString *error_msg = (NSString *) [jsonData objectForKey:@"error_message"];
@@ -121,6 +126,7 @@
     @finally {
         [self hideActivityIndicator];
     }
+    [self performSegueWithIdentifier:@"loginSegue" sender:self]; //DEBUG - get around password shit until actually made / implemented
 }
 
 -(IBAction) loginClicked:(UIButton *) sender {
