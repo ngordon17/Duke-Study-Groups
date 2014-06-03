@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *myPassword;
 @property (weak, nonatomic) IBOutlet UIButton *myLoginButton;
 @property (strong, nonatomic) UIActivityIndicatorView *myActivityIndicator;
+@property (weak, nonatomic) IBOutlet UIButton *myRegisterButton;
 
 @end

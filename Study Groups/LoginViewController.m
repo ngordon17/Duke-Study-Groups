@@ -26,11 +26,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
-    [self setNeedsStatusBarAppearanceUpdate];
     _myEmail.delegate = self;
     _myPassword.delegate = self;
     _myLoginButton.layer.borderWidth = .5f;
     _myLoginButton.layer.borderColor = [[UIColor whiteColor]CGColor];
+    _myRegisterButton.layer.borderWidth = .5f;
+    _myRegisterButton.layer.borderColor = [[UIColor whiteColor]CGColor];
     _myActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     _myActivityIndicator.layer.backgroundColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4] CGColor];
     _myActivityIndicator.frame = CGRectMake(0, 0, 50, 50);
@@ -53,6 +54,12 @@
 -(void) hideActivityIndicator {
     [_myActivityIndicator setHidden:true];
     [_myActivityIndicator stopAnimating];
+}
+
+#pragma mark - Register Button
+
+-(IBAction) registerClicked:(UIButton *) sender {
+    [self performSegueWithIdentifier:@"registerSegue" sender:self];
 }
 
 #pragma mark - Login Button 
@@ -126,7 +133,7 @@
     @finally {
         [self hideActivityIndicator];
     }
-    [self performSegueWithIdentifier:@"loginSegue" sender:self]; //DEBUG - get around password shit until actually made / implemented
+    [self performSegueWithIdentifier:@"loginSegue" sender:self]; //DEBUG - to get around password shit until actually made / implemented
 }
 
 -(IBAction) loginClicked:(UIButton *) sender {
@@ -135,11 +142,6 @@
     return;
 }
 
-
-#pragma mark - Status Bar Options
--(UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
 
 #pragma mark - Text Field Delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
