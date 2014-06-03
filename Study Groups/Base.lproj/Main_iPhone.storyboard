@@ -21,19 +21,19 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aGl-9e-Sna" userLabel="Text Field - Email">
-                                <rect key="frame" x="61" y="211" width="197" height="30"/>
+                                <rect key="frame" x="61" y="217" width="197" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vZ7-9Q-kKA" userLabel="Text Field - Password">
-                                <rect key="frame" x="61" y="240" width="197" height="30"/>
+                                <rect key="frame" x="61" y="246" width="197" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GwA-W0-g8g">
-                                <rect key="frame" x="62" y="278" width="197" height="30"/>
+                                <rect key="frame" x="61" y="284" width="197" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="197" id="KXv-NC-cvh"/>
@@ -53,11 +53,47 @@
                         <outlet property="myLoginButton" destination="GwA-W0-g8g" id="Jqn-FD-vpp"/>
                         <outlet property="myLogo" destination="A9B-hk-MOK" id="7tL-3p-OnL"/>
                         <outlet property="myPassword" destination="vZ7-9Q-kKA" id="MHK-Iy-l05"/>
+                        <segue destination="Aam-Yf-nOB" kind="push" identifier="loginSegue" id="gkk-dm-APY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="76" y="132"/>
+            <point key="canvasLocation" x="-1260" y="224"/>
+        </scene>
+        <!--Main Menu View Controller-->
+        <scene sceneID="Rsh-nl-3OX">
+            <objects>
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="Aam-Yf-nOB" customClass="MainMenuViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="bWT-32-jXg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YIw-s1-Q46">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="xTu-Q1-YNk">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Aam-Yf-nOB" id="GZd-Nk-Dv6"/>
+                            <outlet property="delegate" destination="Aam-Yf-nOB" id="P5i-vc-W7X"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="fGU-8z-a00"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hMz-ld-tlY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-815" y="224"/>
         </scene>
     </scenes>
     <resources>

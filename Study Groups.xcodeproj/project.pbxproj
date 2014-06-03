@@ -35,6 +35,7 @@
 		6CC6AE30193D67240014CC57 /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC6AE22193D67240014CC57 /* SBJsonTokeniser.m */; };
 		6CC6AE31193D67240014CC57 /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC6AE24193D67240014CC57 /* SBJsonUTF8Stream.m */; };
 		6CC6AE32193D67240014CC57 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC6AE26193D67240014CC57 /* SBJsonWriter.m */; };
+		6CC6AE39193D6E220014CC57 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC6AE38193D6E220014CC57 /* MainMenuViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,8 @@
 		6CC6AE24193D67240014CC57 /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
 		6CC6AE25193D67240014CC57 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		6CC6AE26193D67240014CC57 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		6CC6AE37193D6E220014CC57 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
+		6CC6AE38193D6E220014CC57 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +176,7 @@
 		6C96EC4B193D350A00D0B206 /* Study Groups */ = {
 			isa = PBXGroup;
 			children = (
+				6CC6AE33193D6D310014CC57 /* Main Menu */,
 				6C7E415F193D3C1F0060D6FD /* Resources */,
 				6C96EC7D193D351700D0B206 /* Storyboard */,
 				6C96EC54193D350A00D0B206 /* AppDelegate.h */,
@@ -252,6 +256,15 @@
 				6CC6AE26193D67240014CC57 /* SBJsonWriter.m */,
 			);
 			name = Json;
+			sourceTree = "<group>";
+		};
+		6CC6AE33193D6D310014CC57 /* Main Menu */ = {
+			isa = PBXGroup;
+			children = (
+				6CC6AE37193D6E220014CC57 /* MainMenuViewController.h */,
+				6CC6AE38193D6E220014CC57 /* MainMenuViewController.m */,
+			);
+			name = "Main Menu";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,6 +381,7 @@
 				6CC6AE2C193D67240014CC57 /* SBJsonStreamParserState.m in Sources */,
 				6CC6AE2E193D67240014CC57 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				6CC6AE2F193D67240014CC57 /* SBJsonStreamWriterState.m in Sources */,
+				6CC6AE39193D6E220014CC57 /* MainMenuViewController.m in Sources */,
 				6CC6AE31193D67240014CC57 /* SBJsonUTF8Stream.m in Sources */,
 				6C96EC52193D350A00D0B206 /* main.m in Sources */,
 				6CC6AE2B193D67240014CC57 /* SBJsonStreamParserAdapter.m in Sources */,

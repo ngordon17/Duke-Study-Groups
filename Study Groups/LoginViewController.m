@@ -30,11 +30,28 @@
     _myPassword.delegate = self;
     _myLoginButton.layer.borderWidth = .5f;
     _myLoginButton.layer.borderColor = [[UIColor whiteColor]CGColor];
+    _myActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    _myActivityIndicator.layer.backgroundColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4] CGColor];
+    _myActivityIndicator.frame = CGRectMake(0, 0, 50, 50);
+    _myActivityIndicator.center = CGPointMake(self.view.frame.size.width / 2.0, (self.view.frame.size.height / 2.0) - 40);
+    [self.view addSubview: _myActivityIndicator];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Activity Indicator
+-(void) showActivityIndicator {
+    [_myActivityIndicator setHidden:false];
+    [_myActivityIndicator startAnimating];
+}
+
+-(void) hideActivityIndicator {
+    [_myActivityIndicator setHidden:true];
+    [_myActivityIndicator stopAnimating];
 }
 
 #pragma mark - Login Button 
@@ -45,10 +62,10 @@
 }
 
 //SOURCE:http://dipinkrishna.com/blog/2012/03/iphoneios-programming-login-screen-post-data-url-parses-json-response/5/
--(IBAction) loginClicked:(UIButton *) sender {
+-(void) verifyLogin {
     NSLog(@"Attempting Login... Email: %@ || Password: %@", _myEmail.text, _myPassword.text); //DEBUG
-    //TODO: verify login and retrieve user id
     @try {
+        //TODO: check to see if email is duke.edu
         if ([_myEmail.text isEqualToString:@""] || [_myPassword.text isEqualToString:@""]) {
             [self alertStatus:@"Please enter email and password!" :@"Login Failed!"];
         }
@@ -84,7 +101,7 @@
                 if (success == 1) {
                     NSLog(@"Login successful!"); //DEBUG
                     [self alertStatus:@"Logged in successfully." : @"Login sucess!"];
-                    //REDIRECT!
+                    //TODO: REDIRECT!
                 }
                 else {
                     NSString *error_msg = (NSString *) [jsonData objectForKey:@"error_message"];
@@ -101,6 +118,15 @@
         NSLog(@"Exception: %@", e); //DEBUG
         [self alertStatus:@"Login failed." :@"Login failed!"];
     }
+    @finally {
+        [self hideActivityIndicator];
+    }
+}
+
+-(IBAction) loginClicked:(UIButton *) sender {
+    [self showActivityIndicator];
+    [self performSelector: @selector(verifyLogin) withObject:nil afterDelay:0]; //allow UI to repaint with indicator
+    return;
 }
 
 
