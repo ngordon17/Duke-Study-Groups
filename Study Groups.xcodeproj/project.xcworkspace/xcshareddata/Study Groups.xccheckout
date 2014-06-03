@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>606FB9A6-905B-4EA1-8A26-040859448F3B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Study Groups</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F407E86F-56A3-4E9B-9373-522F42D4D909</key>
+		<string>https://github.com/ngordon17/Duke-Study-Groups</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Study Groups.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F407E86F-56A3-4E9B-9373-522F42D4D909</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ngordon17/Duke-Study-Groups</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F407E86F-56A3-4E9B-9373-522F42D4D909</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F407E86F-56A3-4E9B-9373-522F42D4D909</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Duke-Study-Groups</string>
+		</dict>
+	</array>
+</dict>
+</plist>
