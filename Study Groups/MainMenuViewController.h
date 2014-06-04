@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MainMenuCell.h"
+
 
 @interface MainMenuViewController : UICollectionViewController
-@property (strong, nonatomic) NSArray *myImageArray;
-@property (strong, nonatomic) NSArray *myDescriptionArray;
+@property (strong, nonatomic) NSArray *myIdentifierArray;
 
 @end

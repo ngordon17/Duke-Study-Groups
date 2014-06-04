@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface MainMenuCell : UICollectionViewCell
+
 @property (weak, nonatomic) IBOutlet UIImageView *myImage;
 @property (weak, nonatomic) IBOutlet UILabel *myLabel;
+
 
 @end

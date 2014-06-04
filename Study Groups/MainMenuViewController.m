@@ -7,6 +7,7 @@
 //
 
 #import "MainMenuViewController.h"
+#import "MainMenuCell.h"
 
 
 @interface MainMenuViewController ()
@@ -25,9 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[self navigationController] setNavigationBarHidden:YES animated:YES];
-    _myImageArray = [[NSArray alloc] initWithObjects:@"study-groups.png", @"course-list.png", @"class-schedule.png", @"faq.png", @"settings.png", @"calender.png", nil];
-    _myDescriptionArray = [[NSArray alloc] initWithObjects:@"Study Groups", @"Course List", @"Class Schedule", @"FAQ", @"Settings", @"Calender", nil];
+    _myIdentifierArray = [NSArray arrayWithObjects:@"study-groups", @"class-schedule", @"course-list", @"calender", @"settings", @"faq", nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,19 +35,19 @@
 }
 
 #pragma mark - data source and delegate methods
+
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [_myImageArray count];
+    return [_myIdentifierArray count];
 }
 
+
+
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *identifier = @"Cell";
-    MainMenuCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    [[cell myImage] setImage:[UIImage imageNamed:[_myImageArray objectAtIndex:indexPath.item]]];
-    [[cell myLabel] setText:[_myDescriptionArray objectAtIndex:indexPath.item]];
+    MainMenuCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[_myIdentifierArray objectAtIndex:indexPath.item] forIndexPath:indexPath];
     return cell;
 }
 

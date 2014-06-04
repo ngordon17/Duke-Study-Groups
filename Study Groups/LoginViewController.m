@@ -59,7 +59,7 @@
 #pragma mark - Register Button
 
 -(IBAction) registerClicked:(UIButton *) sender {
-    [self performSegueWithIdentifier:@"registerSegue" sender:self];
+    [self performSegueWithIdentifier:@"register-segue" sender:self];
 }
 
 #pragma mark - Login Button 
@@ -75,8 +75,6 @@
     @try {
         //TODO: check to see if email is duke.edu
         if ([_myEmail.text isEqualToString:@""] || [_myPassword.text isEqualToString:@""]) {
-            
-
              [self alertStatus:@"Please enter email and password!" :@"Login Failed!"];
         }
         else {
@@ -112,7 +110,7 @@
                     NSLog(@"Login successful!"); //DEBUG
                     [self alertStatus:@"Logged in successfully." : @"Login sucess!"];
                     //TODO: REDIRECT with user data!
-                    [self performSegueWithIdentifier:@"loginSegue" sender:self];
+                    [self performSegueWithIdentifier:@"login-segue" sender:self];
                    
                 }
                 else {
@@ -133,12 +131,12 @@
     @finally {
         [self hideActivityIndicator];
     }
-    [self performSegueWithIdentifier:@"loginSegue" sender:self]; //DEBUG - to get around password shit until actually made / implemented
+    [self performSegueWithIdentifier:@"login-segue" sender:self]; //DEBUG - to get around password shit until actually made / implemented
 }
 
 -(IBAction) loginClicked:(UIButton *) sender {
     [self showActivityIndicator];
-    [self performSelector: @selector(verifyLogin) withObject:nil afterDelay:0]; //allow UI to repaint with indicator
+    [self performSelector: @selector(verifyLogin) withObject:nil afterDelay:0]; //allow UI to repaint with indicator, extra delay required -- 0.001?
     return;
 }
 

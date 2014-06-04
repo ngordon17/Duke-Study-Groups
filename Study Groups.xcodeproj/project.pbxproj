@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6C719726193DA75800C1993A /* MainMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C719725193DA75800C1993A /* MainMenuCell.m */; };
 		6C71972D193DAA2800C1993A /* class-schedule.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C719727193DAA2800C1993A /* class-schedule.png */; };
 		6C71972E193DAA2800C1993A /* faq.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C719728193DAA2800C1993A /* faq.png */; };
 		6C71972F193DAA2800C1993A /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C719729193DAA2800C1993A /* settings.png */; };
 		6C719730193DAA2800C1993A /* course-list.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C71972A193DAA2800C1993A /* course-list.png */; };
 		6C719731193DAA2800C1993A /* study-groups.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C71972B193DAA2800C1993A /* study-groups.png */; };
 		6C719732193DAA2800C1993A /* calender.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C71972C193DAA2800C1993A /* calender.png */; };
+		6C7DADAE193E572C00731DB8 /* CourseListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7DADAD193E572C00731DB8 /* CourseListViewController.m */; };
+		6C7DADB1193E940600731DB8 /* MainMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7DADB0193E940600731DB8 /* MainMenuCell.m */; };
 		6C7E4163193D3CE50060D6FD /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C7E4162193D3CE50060D6FD /* logo.jpg */; };
 		6C7E4166193D46BA0060D6FD /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E4165193D46BA0060D6FD /* LoginViewController.m */; };
 		6C96EC46193D350A00D0B206 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C96EC45193D350A00D0B206 /* Foundation.framework */; };
@@ -57,14 +58,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6C719724193DA75800C1993A /* MainMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuCell.h; sourceTree = "<group>"; };
-		6C719725193DA75800C1993A /* MainMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuCell.m; sourceTree = "<group>"; };
 		6C719727193DAA2800C1993A /* class-schedule.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "class-schedule.png"; sourceTree = "<group>"; };
 		6C719728193DAA2800C1993A /* faq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = faq.png; sourceTree = "<group>"; };
 		6C719729193DAA2800C1993A /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		6C71972A193DAA2800C1993A /* course-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "course-list.png"; sourceTree = "<group>"; };
 		6C71972B193DAA2800C1993A /* study-groups.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "study-groups.png"; sourceTree = "<group>"; };
 		6C71972C193DAA2800C1993A /* calender.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calender.png; sourceTree = "<group>"; };
+		6C7DADAC193E572C00731DB8 /* CourseListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseListViewController.h; sourceTree = "<group>"; };
+		6C7DADAD193E572C00731DB8 /* CourseListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseListViewController.m; sourceTree = "<group>"; };
+		6C7DADAF193E940600731DB8 /* MainMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuCell.h; sourceTree = "<group>"; };
+		6C7DADB0193E940600731DB8 /* MainMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuCell.m; sourceTree = "<group>"; };
 		6C7E4162193D3CE50060D6FD /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
 		6C7E4164193D46BA0060D6FD /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		6C7E4165193D46BA0060D6FD /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
@@ -142,6 +145,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C7DADA5193E564300731DB8 /* Course List */ = {
+			isa = PBXGroup;
+			children = (
+				6C7DADAC193E572C00731DB8 /* CourseListViewController.h */,
+				6C7DADAD193E572C00731DB8 /* CourseListViewController.m */,
+			);
+			name = "Course List";
+			sourceTree = "<group>";
+		};
 		6C7E415F193D3C1F0060D6FD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +212,7 @@
 		6C96EC4B193D350A00D0B206 /* Study Groups */ = {
 			isa = PBXGroup;
 			children = (
+				6C7DADA5193E564300731DB8 /* Course List */,
 				6CC6AE3D193D8F5F0014CC57 /* Registration */,
 				6CC6AE33193D6D310014CC57 /* Main Menu */,
 				6C7E415F193D3C1F0060D6FD /* Resources */,
@@ -288,8 +301,8 @@
 			children = (
 				6CC6AE37193D6E220014CC57 /* MainMenuViewController.h */,
 				6CC6AE38193D6E220014CC57 /* MainMenuViewController.m */,
-				6C719724193DA75800C1993A /* MainMenuCell.h */,
-				6C719725193DA75800C1993A /* MainMenuCell.m */,
+				6C7DADAF193E940600731DB8 /* MainMenuCell.h */,
+				6C7DADB0193E940600731DB8 /* MainMenuCell.m */,
 			);
 			name = "Main Menu";
 			sourceTree = "<group>";
@@ -421,12 +434,13 @@
 				6CC6AE28193D67240014CC57 /* SBJsonParser.m in Sources */,
 				6CC6AE2A193D67240014CC57 /* SBJsonStreamParserAccumulator.m in Sources */,
 				6CC6AE2C193D67240014CC57 /* SBJsonStreamParserState.m in Sources */,
+				6C7DADAE193E572C00731DB8 /* CourseListViewController.m in Sources */,
 				6CC6AE2E193D67240014CC57 /* SBJsonStreamWriterAccumulator.m in Sources */,
+				6C7DADB1193E940600731DB8 /* MainMenuCell.m in Sources */,
 				6CC6AE2F193D67240014CC57 /* SBJsonStreamWriterState.m in Sources */,
 				6CC6AE3C193D8F590014CC57 /* RegistrationViewController.m in Sources */,
 				6CC6AE39193D6E220014CC57 /* MainMenuViewController.m in Sources */,
 				6CC6AE31193D67240014CC57 /* SBJsonUTF8Stream.m in Sources */,
-				6C719726193DA75800C1993A /* MainMenuCell.m in Sources */,
 				6C96EC52193D350A00D0B206 /* main.m in Sources */,
 				6CC6AE2B193D67240014CC57 /* SBJsonStreamParserAdapter.m in Sources */,
 			);
