@@ -27,8 +27,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _mySubjectList = [self getSubjectList];
-    NSLog(@"%@", [_mySubjectList objectAtIndex:1]);
-    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -44,6 +42,7 @@
 
 #pragma mark - Retrieve data
 
+//TODO: add activity indicator somewhere
 - (NSArray *) getSubjectList {
     @try {
         NSURL *url = [NSURL URLWithString:@"https://streamer.oit.duke.edu/curriculum/list_of_values/fieldname/SUBJECT?access_token=a90cec76bce0a30d4a53aca6ca780448"];
@@ -61,7 +60,7 @@
             SBJsonParser *jsonParser = [SBJsonParser new];
             NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
             //NSLog(@"%@", jsonData); //DEBUG
-            NSDictionary *subjectData = [[[[[jsonData objectForKey:@"scc_lov_resp"] objectForKey:@"lovs"] objectForKey:@"lov"] objectForKey: @"values"] objectForKey:@"value"];
+            NSArray *subjectData = [[[[[jsonData objectForKey:@"scc_lov_resp"] objectForKey:@"lovs"] objectForKey:@"lov"] objectForKey: @"values"] objectForKey:@"value"];
             //NSLog(@"%@", subjectData); //DEBUG
             return subjectData;
         }
