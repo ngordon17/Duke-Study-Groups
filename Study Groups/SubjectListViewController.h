@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CourseListViewController : UITableViewController
+@interface SubjectListViewController : UITableViewController
+
+@property (strong, nonatomic) NSArray *mySubjectList;
 
 
 @end

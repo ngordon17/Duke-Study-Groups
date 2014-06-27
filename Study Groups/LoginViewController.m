@@ -75,7 +75,10 @@
     @try {
         //TODO: check to see if email is duke.edu
         if ([_myEmail.text isEqualToString:@""] || [_myPassword.text isEqualToString:@""]) {
-             [self alertStatus:@"Please enter email and password!" :@"Login Failed!"];
+             [self alertStatus:@"Please enter Duke email and password!" :@"Login Failed!"];
+        }
+        else if (![_myEmail.text hasSuffix:@"@duke.edu"]) {
+            [self alertStatus:@"Email must be a Duke address!" :@"Login Failed!"];
         }
         else {
             NSString *post = [[NSString alloc] initWithFormat:@"username=%@&password=%@", _myEmail.text, _myPassword.text];
@@ -136,7 +139,7 @@
 
 -(IBAction) loginClicked:(UIButton *) sender {
     [self showActivityIndicator];
-    [self performSelector: @selector(verifyLogin) withObject:nil afterDelay:0]; //allow UI to repaint with indicator, extra delay required -- 0.001?
+    [self performSelector: @selector(verifyLogin) withObject:nil afterDelay:0.0001]; //delay required to allow UI to repaint with activity indicator.
     return;
 }
 
