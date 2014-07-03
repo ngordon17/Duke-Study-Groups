@@ -10,6 +10,6 @@
 
 @interface CourseListViewController : UITableViewController
 @property (strong, nonatomic) NSString *mySubject;
-@property (strong, nonatomic) NSArray *myCourses;
+@property (strong, nonatomic) NSArray *myCourseList;
 
 @end

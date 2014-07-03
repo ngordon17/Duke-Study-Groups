@@ -26,25 +26,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    _myCourseList = [self getCourseList];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Retrieve data
 
 //TODO: add activity indicator somewhere
-- (NSArray *) getSubjectList {
+- (NSArray *) getCourseList {
     @try {
-        NSString *address = [[@"https://streamer.oit.duke.edu/curriculum/list_of_values/fieldname/" stringByAppendingString:_mySubject] stringByAppendingString:@"?access_token=a90cec76bce0a30d4a53aca6ca780448"];
+        
+    
+        NSString *escapedSubject = [_mySubject stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+        NSString *address = [NSString stringWithFormat:@"https://streamer.oit.duke.edu/curriculum/courses/subject/%@?access_token=a90cec76bce0a30d4a53aca6ca780448", escapedSubject];
         NSURL *url = [NSURL URLWithString:address];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setURL: url];
@@ -60,9 +57,9 @@
             SBJsonParser *jsonParser = [SBJsonParser new];
             NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
             //NSLog(@"%@", jsonData); //DEBUG
-            NSArray *subjectData = [[[[[jsonData objectForKey:@"scc_lov_resp"] objectForKey:@"lovs"] objectForKey:@"lov"] objectForKey: @"values"] objectForKey:@"value"];
-            //NSLog(@"%@", subjectData); //DEBUG
-            return subjectData;
+            NSArray *courseData = [[[[[[jsonData objectForKey:@"ssr_get_courses_resp"] objectForKey:@"course_search_result"] objectForKey:@"subjects"] objectForKey: @"subject"] objectForKey:@"course_summaries"] objectForKey: @"course_summary"];
+            NSLog(@"%@", courseData); //DEBUG
+            return courseData;
         }
         else {
             if (error) {NSLog(@"Error: %@", error);}
@@ -82,57 +79,19 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return _myCourseList.count;
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CourseListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    NSString *subject = [[_myCourseList objectAtIndex: indexPath.item] objectForKey: @"subject"];
+    NSString *catalog_nbr = [[_myCourseList objectAtIndex: indexPath.item] objectForKey: @"catalog_nbr"];
+    NSString *course_title = [[_myCourseList objectAtIndex: indexPath.item] objectForKey: @"course_title_long"];
     
-    // Configure the cell...
-    
+    cell.myLabel.text = [NSString stringWithFormat:@"%@ %@ - %@", subject, catalog_nbr, course_title];
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation

@@ -377,7 +377,7 @@
             </objects>
             <point key="canvasLocation" x="-1461" y="247"/>
         </scene>
-        <!--Subject List View Controller-->
+        <!--Subject List View Controller - Subjects-->
         <scene sceneID="Nqu-wh-TPu">
             <objects>
                 <tableViewController id="njs-OI-j1U" customClass="SubjectListViewController" sceneMemberID="viewController">
@@ -394,9 +394,9 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2FS-RQ-GkG">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="20" y="0.0" width="267" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -413,13 +413,13 @@
                             <outlet property="delegate" destination="njs-OI-j1U" id="K2K-uV-qiV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="EYg-3m-V71"/>
+                    <navigationItem key="navigationItem" title="Subjects" id="EYg-3m-V71"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="emL-EH-ha3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-280" y="-81"/>
         </scene>
-        <!--Course List View Controller-->
+        <!--Course List View Controller - Courses-->
         <scene sceneID="jGo-Tf-puF">
             <objects>
                 <tableViewController id="m7l-41-Umk" customClass="CourseListViewController" sceneMemberID="viewController">
@@ -428,13 +428,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="ASO-Lk-GPM">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="ASO-Lk-GPM" customClass="CourseListViewCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ASO-Lk-GPM" id="Pmk-qx-SvB">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cc-v3-gcQ">
+                                            <rect key="frame" x="20" y="0.0" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="myLabel" destination="6cc-v3-gcQ" id="Wpy-6f-kIp"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -442,7 +453,7 @@
                             <outlet property="delegate" destination="m7l-41-Umk" id="MrC-5b-36F"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="ha3-j5-wu3"/>
+                    <navigationItem key="navigationItem" title="Courses" id="ha3-j5-wu3"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rou-0v-uo6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

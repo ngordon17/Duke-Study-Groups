@@ -93,16 +93,16 @@
 }
 
 
-
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
     if ([[segue destinationViewController] isKindOfClass: [CourseListViewController class]]) {
         CourseListViewController* clvc = [segue destinationViewController];
-        clvc.mySubject = @"joseph";
+        NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
+        NSString *code = [[_mySubjectList objectAtIndex: selected.item] objectForKey:@"code"];
+        NSString *desc = [[_mySubjectList objectAtIndex: selected.item] objectForKey:@"desc"];
+        clvc.mySubject = [NSString stringWithFormat:@"%@ - %@", code, desc];
+        NSLog(@"Subject: %@", clvc.mySubject); //DEBUG
     }
 }
 
