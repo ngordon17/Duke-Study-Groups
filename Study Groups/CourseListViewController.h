@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CourseListViewController : UITableViewController
+@property (strong, nonatomic) NSString *mySubject;
+@property (strong, nonatomic) NSArray *myCourses;
 
 @end

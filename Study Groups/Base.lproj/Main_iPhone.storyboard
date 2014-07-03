@@ -386,11 +386,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="P3N-IP-7Fo" customClass="SubjectListViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="P3N-IP-7Fo" customClass="SubjectListViewCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P3N-IP-7Fo" id="92m-PW-Abs">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2FS-RQ-GkG">
@@ -404,6 +404,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="myLabel" destination="2FS-RQ-GkG" id="3FN-cU-Dgm"/>
+                                    <segue destination="m7l-41-Umk" kind="push" id="UGQ-Ci-uam"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -427,8 +428,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ASO-Lk-GPM">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="ASO-Lk-GPM">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ASO-Lk-GPM" id="Pmk-qx-SvB">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -441,6 +442,7 @@
                             <outlet property="delegate" destination="m7l-41-Umk" id="MrC-5b-36F"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="ha3-j5-wu3"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rou-0v-uo6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

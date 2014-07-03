@@ -7,6 +7,8 @@
 //
 
 #import "CourseListViewController.h"
+#import "SBJson.h"
+#import "CourseListViewCell.h"
 
 @interface CourseListViewController ()
 
@@ -14,8 +16,7 @@
 
 @implementation CourseListViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
+- (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
@@ -23,8 +24,7 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -34,25 +34,54 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+#pragma mark - Retrieve data
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+//TODO: add activity indicator somewhere
+- (NSArray *) getSubjectList {
+    @try {
+        NSString *address = [[@"https://streamer.oit.duke.edu/curriculum/list_of_values/fieldname/" stringByAppendingString:_mySubject] stringByAppendingString:@"?access_token=a90cec76bce0a30d4a53aca6ca780448"];
+        NSURL *url = [NSURL URLWithString:address];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL: url];
+        
+        NSError *error = [[NSError alloc] init];
+        NSHTTPURLResponse *response = nil;
+        NSData *urlData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        NSLog(@"Response code: %d", [response statusCode]); //DEBUG
+        
+        if ([response statusCode] >= 200 && [response statusCode] < 300) {
+            NSString *responseData = [[NSString alloc] initWithData: urlData encoding:NSUTF8StringEncoding];
+            //NSLog(@"Response ==> %@", responseData); //DEBUG
+            SBJsonParser *jsonParser = [SBJsonParser new];
+            NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
+            //NSLog(@"%@", jsonData); //DEBUG
+            NSArray *subjectData = [[[[[jsonData objectForKey:@"scc_lov_resp"] objectForKey:@"lovs"] objectForKey:@"lov"] objectForKey: @"values"] objectForKey:@"value"];
+            //NSLog(@"%@", subjectData); //DEBUG
+            return subjectData;
+        }
+        else {
+            if (error) {NSLog(@"Error: %@", error);}
+            NSLog(@"Connection failed! Please check your internet connection and try again.");
+            return nil;
+        }
+    }
+    @catch (NSException *e) {
+        NSLog(@"Exception: %@", e); //DEBUG
+    }
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 0;
 }
 
