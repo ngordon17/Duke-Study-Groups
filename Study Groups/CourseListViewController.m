@@ -81,7 +81,7 @@
         }
         else {
             if (error) {NSLog(@"Error: %@", error);}
-            NSLog(@"Connection failed! Please check your internet connection and try again.");
+            NSLog(@"Connection failed!");
             _myCourseList = nil;
         }
         [self.tableView reloadData];

@@ -57,7 +57,9 @@
 
 
 -(void) getGroupList {
+    
     _myGroupList = nil;
+    [self hideActivityIndicator];
 }
 
 
