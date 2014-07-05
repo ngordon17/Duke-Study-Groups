@@ -11,5 +11,6 @@
 @interface CourseListViewController : UITableViewController
 @property (strong, nonatomic) NSString *mySubject;
 @property (strong, nonatomic) NSArray *myCourseList;
+@property (strong, nonatomic) UIActivityIndicatorView *myActivityIndicator;
 
 @end

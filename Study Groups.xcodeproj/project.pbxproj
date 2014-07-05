@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C2527B219684D6800B67720 /* StudyGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2527B119684D6800B67720 /* StudyGroupViewController.m */; };
+		6C2527B71968688400B67720 /* CourseTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2527B61968688400B67720 /* CourseTabViewController.m */; };
 		6C34F2D3195D2F97007F3C30 /* SubjectListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C34F2D2195D2F97007F3C30 /* SubjectListViewCell.m */; };
 		6C34F2D7195D3562007F3C30 /* CourseListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C34F2D6195D3562007F3C30 /* CourseListViewCell.m */; };
 		6C34F2DA195D3575007F3C30 /* CourseListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C34F2D9195D3575007F3C30 /* CourseListViewController.m */; };
@@ -20,6 +22,9 @@
 		6C7DADB1193E940600731DB8 /* MainMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7DADB0193E940600731DB8 /* MainMenuCell.m */; };
 		6C7E4163193D3CE50060D6FD /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C7E4162193D3CE50060D6FD /* logo.jpg */; };
 		6C7E4166193D46BA0060D6FD /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E4165193D46BA0060D6FD /* LoginViewController.m */; };
+		6C95527719660BAE00F8FC31 /* StudyGroupListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C95527619660BAE00F8FC31 /* StudyGroupListViewController.m */; };
+		6C95527B19660BD500F8FC31 /* StudyGroupListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C95527A19660BD500F8FC31 /* StudyGroupListViewCell.m */; };
+		6C95528219660C2100F8FC31 /* CourseInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C95528119660C2100F8FC31 /* CourseInformationViewController.m */; };
 		6C96EC46193D350A00D0B206 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C96EC45193D350A00D0B206 /* Foundation.framework */; };
 		6C96EC48193D350A00D0B206 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C96EC47193D350A00D0B206 /* CoreGraphics.framework */; };
 		6C96EC4A193D350A00D0B206 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C96EC49193D350A00D0B206 /* UIKit.framework */; };
@@ -61,6 +66,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6C2527B019684D6800B67720 /* StudyGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudyGroupViewController.h; sourceTree = "<group>"; };
+		6C2527B119684D6800B67720 /* StudyGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudyGroupViewController.m; sourceTree = "<group>"; };
+		6C2527B51968688400B67720 /* CourseTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseTabViewController.h; sourceTree = "<group>"; };
+		6C2527B61968688400B67720 /* CourseTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseTabViewController.m; sourceTree = "<group>"; };
 		6C34F2D1195D2F97007F3C30 /* SubjectListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectListViewCell.h; sourceTree = "<group>"; };
 		6C34F2D2195D2F97007F3C30 /* SubjectListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectListViewCell.m; sourceTree = "<group>"; };
 		6C34F2D5195D3562007F3C30 /* CourseListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseListViewCell.h; sourceTree = "<group>"; };
@@ -80,6 +89,12 @@
 		6C7E4162193D3CE50060D6FD /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.jpg; sourceTree = "<group>"; };
 		6C7E4164193D46BA0060D6FD /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		6C7E4165193D46BA0060D6FD /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		6C95527519660BAE00F8FC31 /* StudyGroupListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudyGroupListViewController.h; sourceTree = "<group>"; };
+		6C95527619660BAE00F8FC31 /* StudyGroupListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudyGroupListViewController.m; sourceTree = "<group>"; };
+		6C95527919660BD500F8FC31 /* StudyGroupListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudyGroupListViewCell.h; sourceTree = "<group>"; };
+		6C95527A19660BD500F8FC31 /* StudyGroupListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudyGroupListViewCell.m; sourceTree = "<group>"; };
+		6C95528019660C2100F8FC31 /* CourseInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseInformationViewController.h; sourceTree = "<group>"; };
+		6C95528119660C2100F8FC31 /* CourseInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseInformationViewController.m; sourceTree = "<group>"; };
 		6C96EC42193D350A00D0B206 /* Study Groups.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Study Groups.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C96EC45193D350A00D0B206 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6C96EC47193D350A00D0B206 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -154,6 +169,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C2527B319684D6F00B67720 /* Study Group */ = {
+			isa = PBXGroup;
+			children = (
+				6C2527B019684D6800B67720 /* StudyGroupViewController.h */,
+				6C2527B119684D6800B67720 /* StudyGroupViewController.m */,
+			);
+			name = "Study Group";
+			sourceTree = "<group>";
+		};
+		6C2527B41968683700B67720 /* Course Tab */ = {
+			isa = PBXGroup;
+			children = (
+				6C2527B51968688400B67720 /* CourseTabViewController.h */,
+				6C2527B61968688400B67720 /* CourseTabViewController.m */,
+			);
+			name = "Course Tab";
+			sourceTree = "<group>";
+		};
 		6C34F2D4195D3544007F3C30 /* Course List */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +232,26 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
+		6C95527819660BB200F8FC31 /* Study Group List */ = {
+			isa = PBXGroup;
+			children = (
+				6C95527619660BAE00F8FC31 /* StudyGroupListViewController.m */,
+				6C95527519660BAE00F8FC31 /* StudyGroupListViewController.h */,
+				6C95527919660BD500F8FC31 /* StudyGroupListViewCell.h */,
+				6C95527A19660BD500F8FC31 /* StudyGroupListViewCell.m */,
+			);
+			name = "Study Group List";
+			sourceTree = "<group>";
+		};
+		6C95527C19660BED00F8FC31 /* Course Information */ = {
+			isa = PBXGroup;
+			children = (
+				6C95528019660C2100F8FC31 /* CourseInformationViewController.h */,
+				6C95528119660C2100F8FC31 /* CourseInformationViewController.m */,
+			);
+			name = "Course Information";
+			sourceTree = "<group>";
+		};
 		6C96EC39193D350A00D0B206 = {
 			isa = PBXGroup;
 			children = (
@@ -234,17 +287,21 @@
 		6C96EC4B193D350A00D0B206 /* Study Groups */ = {
 			isa = PBXGroup;
 			children = (
+				6C2527B41968683700B67720 /* Course Tab */,
+				6C2527B319684D6F00B67720 /* Study Group */,
+				6C95527C19660BED00F8FC31 /* Course Information */,
 				6C34F2D4195D3544007F3C30 /* Course List */,
 				6C7DADA5193E564300731DB8 /* Subject List */,
 				6CC6AE3D193D8F5F0014CC57 /* Registration */,
 				6CC6AE33193D6D310014CC57 /* Main Menu */,
 				6C7E415F193D3C1F0060D6FD /* Resources */,
 				6C96EC7D193D351700D0B206 /* Storyboard */,
-				6C96EC54193D350A00D0B206 /* AppDelegate.h */,
-				6C96EC55193D350A00D0B206 /* AppDelegate.m */,
-				6C96EC60193D350A00D0B206 /* Images.xcassets */,
 				6C96EC4C193D350A00D0B206 /* Supporting Files */,
 				6C7E4167193D46C80060D6FD /* Login */,
+				6C95527819660BB200F8FC31 /* Study Group List */,
+				6C96EC60193D350A00D0B206 /* Images.xcassets */,
+				6C96EC54193D350A00D0B206 /* AppDelegate.h */,
+				6C96EC55193D350A00D0B206 /* AppDelegate.m */,
 			);
 			path = "Study Groups";
 			sourceTree = "<group>";
@@ -455,10 +512,12 @@
 				6CC6AE2D193D67240014CC57 /* SBJsonStreamWriter.m in Sources */,
 				6CC6AE29193D67240014CC57 /* SBJsonStreamParser.m in Sources */,
 				6CC6AE28193D67240014CC57 /* SBJsonParser.m in Sources */,
+				6C95527B19660BD500F8FC31 /* StudyGroupListViewCell.m in Sources */,
 				6CC6AE2A193D67240014CC57 /* SBJsonStreamParserAccumulator.m in Sources */,
 				6CC6AE2C193D67240014CC57 /* SBJsonStreamParserState.m in Sources */,
 				6C7DADAE193E572C00731DB8 /* SubjectListViewController.m in Sources */,
 				6C34F2D3195D2F97007F3C30 /* SubjectListViewCell.m in Sources */,
+				6C2527B71968688400B67720 /* CourseTabViewController.m in Sources */,
 				6C34F2D7195D3562007F3C30 /* CourseListViewCell.m in Sources */,
 				6CC6AE2E193D67240014CC57 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				6C7DADB1193E940600731DB8 /* MainMenuCell.m in Sources */,
@@ -466,8 +525,11 @@
 				6CC6AE3C193D8F590014CC57 /* RegistrationViewController.m in Sources */,
 				6CC6AE39193D6E220014CC57 /* MainMenuViewController.m in Sources */,
 				6CC6AE31193D67240014CC57 /* SBJsonUTF8Stream.m in Sources */,
+				6C95527719660BAE00F8FC31 /* StudyGroupListViewController.m in Sources */,
 				6C34F2DA195D3575007F3C30 /* CourseListViewController.m in Sources */,
 				6C96EC52193D350A00D0B206 /* main.m in Sources */,
+				6C95528219660C2100F8FC31 /* CourseInformationViewController.m in Sources */,
+				6C2527B219684D6800B67720 /* StudyGroupViewController.m in Sources */,
 				6CC6AE2B193D67240014CC57 /* SBJsonStreamParserAdapter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

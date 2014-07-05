@@ -9,6 +9,7 @@
 #import "CourseListViewController.h"
 #import "SBJson.h"
 #import "CourseListViewCell.h"
+#import "CourseTabViewController.h"
 
 @interface CourseListViewController ()
 
@@ -26,20 +27,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _myCourseList = [self getCourseList];
+    
+    _myActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    _myActivityIndicator.layer.backgroundColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4] CGColor];
+    _myActivityIndicator.frame = CGRectMake(0, 0, 50, 50);
+    _myActivityIndicator.center = CGPointMake(self.view.frame.size.width / 2.0, (self.view.frame.size.height / 2.0) - 40);
+    [self.view addSubview: _myActivityIndicator];
+    
+    [self showActivityIndicator];
+    [self performSelector: @selector(getCourseList) withObject:nil afterDelay:0.0001]; //delay required to allow UI to repaint with activity indicator.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - Activity Indicator
+-(void) showActivityIndicator {
+    [_myActivityIndicator setHidden:false];
+    [_myActivityIndicator startAnimating];
+}
+
+-(void) hideActivityIndicator {
+    [_myActivityIndicator setHidden:true];
+    [_myActivityIndicator stopAnimating];
+}
+
 #pragma mark - Retrieve data
 
 //TODO: add activity indicator somewhere
-- (NSArray *) getCourseList {
+- (void) getCourseList {
     @try {
-        
-    
         NSString *escapedSubject = [_mySubject stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
         NSString *address = [NSString stringWithFormat:@"https://streamer.oit.duke.edu/curriculum/courses/subject/%@?access_token=a90cec76bce0a30d4a53aca6ca780448", escapedSubject];
         NSURL *url = [NSURL URLWithString:address];
@@ -58,17 +76,21 @@
             NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
             //NSLog(@"%@", jsonData); //DEBUG
             NSArray *courseData = [[[[[[jsonData objectForKey:@"ssr_get_courses_resp"] objectForKey:@"course_search_result"] objectForKey:@"subjects"] objectForKey: @"subject"] objectForKey:@"course_summaries"] objectForKey: @"course_summary"];
-            NSLog(@"%@", courseData); //DEBUG
-            return courseData;
+            //NSLog(@"%@", courseData); //DEBUG
+            _myCourseList = courseData;
         }
         else {
             if (error) {NSLog(@"Error: %@", error);}
             NSLog(@"Connection failed! Please check your internet connection and try again.");
-            return nil;
+            _myCourseList = nil;
         }
+        [self.tableView reloadData];
     }
     @catch (NSException *e) {
         NSLog(@"Exception: %@", e); //DEBUG
+    }
+    @finally {
+        [self hideActivityIndicator];
     }
 }
 
@@ -93,15 +115,20 @@
 }
 
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue destinationViewController] isKindOfClass: [CourseTabViewController class]]) {
+        CourseTabViewController* ctvc = [segue destinationViewController];
+        NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
+        
+        NSString *subject = [[_myCourseList objectAtIndex: selected.item] objectForKey: @"subject"];
+        NSString *catalog_nbr = [[_myCourseList objectAtIndex: selected.item] objectForKey: @"catalog_nbr"];
+        NSString *course_title = [[_myCourseList objectAtIndex: selected.item] objectForKey: @"course_title_long"];
+        ctvc.myCourse = [NSString stringWithFormat:@"%@ %@ - %@", subject, catalog_nbr, course_title];
+        NSLog(@"Course: %@", ctvc.myCourse); //DEBUG
+    }
 }
-*/
+
 
 @end

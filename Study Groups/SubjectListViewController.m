@@ -27,13 +27,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _mySubjectList = [self getSubjectList];
+    _myActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    _myActivityIndicator.layer.backgroundColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4] CGColor];
+    _myActivityIndicator.frame = CGRectMake(0, 0, 50, 50);
+    _myActivityIndicator.center = CGPointMake(self.view.frame.size.width / 2.0, (self.view.frame.size.height / 2.0) - 40);
+    [self.view addSubview: _myActivityIndicator];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self showActivityIndicator];
+    [self performSelector: @selector(getSubjectList) withObject:nil afterDelay:0.0001]; //delay required to allow UI to repaint with activity indicator.
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,10 +43,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Activity Indicator
+-(void) showActivityIndicator {
+    [_myActivityIndicator setHidden:false];
+    [_myActivityIndicator startAnimating];
+}
+
+-(void) hideActivityIndicator {
+    [_myActivityIndicator setHidden:true];
+    [_myActivityIndicator stopAnimating];
+}
+
 #pragma mark - Retrieve data
 
 //TODO: add activity indicator somewhere
-- (NSArray *) getSubjectList {
+- (void) getSubjectList {
     @try {
         NSURL *url = [NSURL URLWithString:@"https://streamer.oit.duke.edu/curriculum/list_of_values/fieldname/SUBJECT?access_token=a90cec76bce0a30d4a53aca6ca780448"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -63,16 +76,20 @@
             //NSLog(@"%@", jsonData); //DEBUG
             NSArray *subjectData = [[[[[jsonData objectForKey:@"scc_lov_resp"] objectForKey:@"lovs"] objectForKey:@"lov"] objectForKey: @"values"] objectForKey:@"value"];
             //NSLog(@"%@", subjectData); //DEBUG
-            return subjectData;
+            _mySubjectList = subjectData;
         }
         else {
             if (error) {NSLog(@"Error: %@", error);}
             NSLog(@"Connection failed!");
-            return nil;
+            _mySubjectList = nil;
         }
+        [self.tableView reloadData];
     }
     @catch (NSException *e) {
         NSLog(@"Exception: %@", e); //DEBUG
+    }
+    @finally {
+        [self hideActivityIndicator];
     }
 }
 
