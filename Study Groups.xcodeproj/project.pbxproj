@@ -18,6 +18,7 @@
 		6C719730193DAA2800C1993A /* course-list.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C71972A193DAA2800C1993A /* course-list.png */; };
 		6C719731193DAA2800C1993A /* study-groups.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C71972B193DAA2800C1993A /* study-groups.png */; };
 		6C719732193DAA2800C1993A /* calender.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C71972C193DAA2800C1993A /* calender.png */; };
+		6C75B9BC19971F0C00543260 /* DatabaseCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C75B9BB19971F0C00543260 /* DatabaseCore.m */; };
 		6C7DADAE193E572C00731DB8 /* SubjectListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7DADAD193E572C00731DB8 /* SubjectListViewController.m */; };
 		6C7DADB1193E940600731DB8 /* MainMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7DADB0193E940600731DB8 /* MainMenuCell.m */; };
 		6C7E4163193D3CE50060D6FD /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C7E4162193D3CE50060D6FD /* logo.jpg */; };
@@ -82,6 +83,8 @@
 		6C71972A193DAA2800C1993A /* course-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "course-list.png"; sourceTree = "<group>"; };
 		6C71972B193DAA2800C1993A /* study-groups.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "study-groups.png"; sourceTree = "<group>"; };
 		6C71972C193DAA2800C1993A /* calender.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calender.png; sourceTree = "<group>"; };
+		6C75B9BA19971F0C00543260 /* DatabaseCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseCore.h; sourceTree = "<group>"; };
+		6C75B9BB19971F0C00543260 /* DatabaseCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseCore.m; sourceTree = "<group>"; };
 		6C7DADAC193E572C00731DB8 /* SubjectListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectListViewController.h; sourceTree = "<group>"; };
 		6C7DADAD193E572C00731DB8 /* SubjectListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectListViewController.m; sourceTree = "<group>"; };
 		6C7DADAF193E940600731DB8 /* MainMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuCell.h; sourceTree = "<group>"; };
@@ -198,6 +201,15 @@
 			name = "Course List";
 			sourceTree = "<group>";
 		};
+		6C75B9B9199716E600543260 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				6C75B9BA19971F0C00543260 /* DatabaseCore.h */,
+				6C75B9BB19971F0C00543260 /* DatabaseCore.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
 		6C7DADA5193E564300731DB8 /* Subject List */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +299,7 @@
 		6C96EC4B193D350A00D0B206 /* Study Groups */ = {
 			isa = PBXGroup;
 			children = (
+				6C75B9B9199716E600543260 /* Core */,
 				6C2527B41968683700B67720 /* Course Tab */,
 				6C2527B319684D6F00B67720 /* Study Group */,
 				6C95527C19660BED00F8FC31 /* Course Information */,
@@ -519,6 +532,7 @@
 				6C34F2D3195D2F97007F3C30 /* SubjectListViewCell.m in Sources */,
 				6C2527B71968688400B67720 /* CourseTabViewController.m in Sources */,
 				6C34F2D7195D3562007F3C30 /* CourseListViewCell.m in Sources */,
+				6C75B9BC19971F0C00543260 /* DatabaseCore.m in Sources */,
 				6CC6AE2E193D67240014CC57 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				6C7DADB1193E940600731DB8 /* MainMenuCell.m in Sources */,
 				6CC6AE2F193D67240014CC57 /* SBJsonStreamWriterState.m in Sources */,

@@ -10,6 +10,7 @@
 #import "SBJson.h"
 #import "CourseListViewCell.h"
 #import "CourseTabViewController.h"
+#import "DatabaseCore.h"
 
 @interface CourseListViewController ()
 
@@ -29,13 +30,13 @@
     [super viewDidLoad];
     
     _myActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    _myActivityIndicator.layer.backgroundColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4] CGColor];
-    _myActivityIndicator.frame = CGRectMake(0, 0, 50, 50);
-    _myActivityIndicator.center = CGPointMake(self.view.frame.size.width / 2.0, (self.view.frame.size.height / 2.0) - 40);
+    _myActivityIndicator.layer.backgroundColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5] CGColor];
+    _myActivityIndicator.layer.cornerRadius = 10.0f;
+    _myActivityIndicator.frame = CGRectMake(0, 0, 55, 55);
+    _myActivityIndicator.center = CGPointMake(self.view.frame.size.width / 2.0, (self.view.frame.size.height / 2.0));
     [self.view addSubview: _myActivityIndicator];
     
-    [self showActivityIndicator];
-    [self performSelector: @selector(getCourseList) withObject:nil afterDelay:0.0001]; //delay required to allow UI to repaint with activity indicator.
+    [self getCourseList];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,41 +56,34 @@
 
 #pragma mark - Retrieve data
 
+-(void) getCourseListCompletionHandler: (NSURLResponse *)response data:(NSData *)data error:(NSError *) error {
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    
+    [self hideActivityIndicator];
+    
+    if ([httpResponse statusCode] < 200 || [httpResponse statusCode] >= 300) {
+        NSLog(@"Error: %@ || Status Code: %d", error, [httpResponse statusCode]);
+        return;
+    }
+    
+    NSString *responseData = [[NSString alloc] initWithData: data encoding:NSUTF8StringEncoding];
+    SBJsonParser *jsonParser = [SBJsonParser new];
+    NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
+    _myCourseList = [[[[[[jsonData objectForKey:@"ssr_get_courses_resp"] objectForKey:@"course_search_result"] objectForKey:@"subjects"] objectForKey: @"subject"] objectForKey:@"course_summaries"] objectForKey: @"course_summary"];
+    
+    [self.tableView reloadData];
+}
+
 //TODO: add activity indicator somewhere
 - (void) getCourseList {
+    [self showActivityIndicator];
+    
     @try {
-        NSString *escapedSubject = [_mySubject stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-        NSString *address = [NSString stringWithFormat:@"https://streamer.oit.duke.edu/curriculum/courses/subject/%@?access_token=a90cec76bce0a30d4a53aca6ca780448", escapedSubject];
-        NSURL *url = [NSURL URLWithString:address];
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setURL: url];
-        
-        NSError *error = [[NSError alloc] init];
-        NSHTTPURLResponse *response = nil;
-        NSData *urlData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        NSLog(@"Response code: %d", [response statusCode]); //DEBUG
-        
-        if ([response statusCode] >= 200 && [response statusCode] < 300) {
-            NSString *responseData = [[NSString alloc] initWithData: urlData encoding:NSUTF8StringEncoding];
-            //NSLog(@"Response ==> %@", responseData); //DEBUG
-            SBJsonParser *jsonParser = [SBJsonParser new];
-            NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
-            //NSLog(@"%@", jsonData); //DEBUG
-            NSArray *courseData = [[[[[[jsonData objectForKey:@"ssr_get_courses_resp"] objectForKey:@"course_search_result"] objectForKey:@"subjects"] objectForKey: @"subject"] objectForKey:@"course_summaries"] objectForKey: @"course_summary"];
-            //NSLog(@"%@", courseData); //DEBUG
-            _myCourseList = courseData;
-        }
-        else {
-            if (error) {NSLog(@"Error: %@", error);}
-            NSLog(@"Connection failed!");
-            _myCourseList = nil;
-        }
-        [self.tableView reloadData];
-    }
-    @catch (NSException *e) {
-        NSLog(@"Exception: %@", e); //DEBUG
-    }
-    @finally {
+        [DatabaseCore getCourseList: _mySubject completionHandler: ^(NSURLResponse *response, NSData *data, NSError *error) {
+            [self getCourseListCompletionHandler:response data:data error:error];
+        }];
+    } @catch (NSException *e) {
+        NSLog(@"Exception: %@", e);
         [self hideActivityIndicator];
     }
 }

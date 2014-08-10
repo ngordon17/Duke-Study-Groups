@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "SBJson.h"
+#import "DatabaseCore.h"
 
 @interface LoginViewController ()
 
@@ -28,14 +29,18 @@
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     _myEmail.delegate = self;
     _myPassword.delegate = self;
+    
     _myLoginButton.layer.borderWidth = .5f;
     _myLoginButton.layer.borderColor = [[UIColor whiteColor]CGColor];
+    
     _myRegisterButton.layer.borderWidth = .5f;
     _myRegisterButton.layer.borderColor = [[UIColor whiteColor]CGColor];
+    
     _myActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    _myActivityIndicator.layer.backgroundColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4] CGColor];
-    _myActivityIndicator.frame = CGRectMake(0, 0, 50, 50);
-    _myActivityIndicator.center = CGPointMake(self.view.frame.size.width / 2.0, (self.view.frame.size.height / 2.0) - 40);
+    _myActivityIndicator.layer.backgroundColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5] CGColor];
+    _myActivityIndicator.layer.cornerRadius = 10.0f;
+    _myActivityIndicator.frame = CGRectMake(0, 0, 55, 55);
+    _myActivityIndicator.center = CGPointMake(self.view.frame.size.width / 2.0, (self.view.frame.size.height / 2.0));
     [self.view addSubview: _myActivityIndicator];
     
 }
@@ -69,78 +74,66 @@
     [alertView show];
 }
 
-//SOURCE:http://dipinkrishna.com/blog/2012/03/iphoneios-programming-login-screen-post-data-url-parses-json-response/5/
--(void) verifyLogin {
-    NSLog(@"Attempting Login... Email: %@ || Password: %@", _myEmail.text, _myPassword.text); //DEBUG
+-(bool) validateLoginInput: (NSString *) email password:(NSString *) password {
+    if ([email isEqualToString:@""] || [password isEqualToString:@""]) {
+        [self alertStatus:@"Please enter Duke email and password!" :@"Login Failed!"];
+        return false;
+        
+    } else if (![_myEmail.text hasSuffix:@"@duke.edu"]) {
+        [self alertStatus:@"Email must be a Duke address!" :@"Login Failed!"];
+        return false;
+    }
+    return true;
+}
+
+-(void) validateLoginCompletionHandler: (NSURLResponse *)response data:(NSData *)data error:(NSError *) error {
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    
+    [self hideActivityIndicator];
+    
+    if ([httpResponse statusCode] < 200 || [httpResponse statusCode] >= 300) {
+        NSLog(@"Error: %@ || Status Code: %d", error, [httpResponse statusCode]);
+        [self alertStatus:@"Connection failed." : @"Login failed!"];
+        return;
+    }
+    
+    NSString *responseData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    SBJsonParser *jsonParser = [SBJsonParser new];
+    NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
+    NSInteger success = [(NSNumber *) [jsonData objectForKey:@"success"] integerValue];
+    
+    if (success != 1) {
+        [self alertStatus:[jsonData objectForKey:@"error_message"] :@"Login Failed!"];
+        return;
+    }
+    
+    [self alertStatus: @"Logged in successfully." : @"Login success!"];
+    [self performSegueWithIdentifier:@"login-segue" sender:self];
+}
+
+-(void) login {    
+    if (![self validateLoginInput: _myEmail.text password: _myPassword.text]) {
+        return;
+    }
+    
+    [self showActivityIndicator];
+    
     @try {
-        //TODO: check to see if email is duke.edu
-        if ([_myEmail.text isEqualToString:@""] || [_myPassword.text isEqualToString:@""]) {
-             [self alertStatus:@"Please enter Duke email and password!" :@"Login Failed!"];
-        }
-        else if (![_myEmail.text hasSuffix:@"@duke.edu"]) {
-            [self alertStatus:@"Email must be a Duke address!" :@"Login Failed!"];
-        }
-        else {
-            NSString *post = [[NSString alloc] initWithFormat:@"username=%@&password=%@", _myEmail.text, _myPassword.text];
-            NSLog(@"Post Data: %@", post); //DEBUG
-            NSURL *url = [NSURL URLWithString:@"http://dipinkrishna.com/jsonlogin.php"]; //TODO: make actual website thing
-            //NSURL *url = [NSURL URLWithString:@"http://dukestudygroups.com/login.php"];
-            NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-            NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
-            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-            [request setURL: url];
-            [request setHTTPMethod:@"POST"];
-            [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-            [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-            [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-            [request setHTTPBody:postData];
-            
-            //[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
-            
-            NSError *error = [[NSError alloc] init];
-            NSHTTPURLResponse *response = nil;
-            NSData *urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-            NSLog(@"Response code: %d", [response statusCode]); //DEBUG
-            if ([response statusCode] >= 200 && [response statusCode] < 300) {
-                NSString *responseData = [[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding];
-                NSLog(@"Response ==> %@", responseData); //DEBUG
-                SBJsonParser *jsonParser = [SBJsonParser new];
-                NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
-                NSLog(@"%@", jsonData);
-                NSInteger success = [(NSNumber *) [jsonData objectForKey:@"success"] integerValue];
-                NSLog(@"%d", success); //DEBUG
-                if (success == 1) {
-                    NSLog(@"Login successful!"); //DEBUG
-                    [self alertStatus:@"Logged in successfully." : @"Login sucess!"];
-                    //TODO: REDIRECT with user data!
-                    [self performSegueWithIdentifier:@"login-segue" sender:self];
-                   
-                }
-                else {
-                    NSString *error_msg = (NSString *) [jsonData objectForKey:@"error_message"];
-                    [self alertStatus:error_msg:@"Login Failed!"];
-                }
-            }
-            else {
-                if (error) {NSLog(@"Error: %@", error);}
-                [self alertStatus:@"Connection failed." : @"Login failed!"];
-            }
-        }
-    }
-    @catch (NSException *e) {
-        NSLog(@"Exception: %@", e); //DEBUG
-        [self alertStatus:@"Login failed." :@"Login failed!"];
-    }
-    @finally {
+        [DatabaseCore validateLogin:_myEmail.text password: _myPassword.text completionHandler: ^(NSURLResponse *response, NSData *data, NSError *error) {
+            [self validateLoginCompletionHandler:response data:data error:error];
+        }];
+        
+    } @catch (NSException *e) {
+        NSLog(@"Exception: %@", e);
         [self hideActivityIndicator];
+        [self alertStatus:@"Login failed." :@"Login failed!"];
+        
     }
-    [self performSegueWithIdentifier:@"login-segue" sender:self]; //DEBUG - to get around password shit until actually made / implemented
+    [self performSegueWithIdentifier:@"login-segue" sender:self];
 }
 
 -(IBAction) loginClicked:(UIButton *) sender {
-    [self showActivityIndicator];
-    [self performSelector: @selector(verifyLogin) withObject:nil afterDelay:0.0001]; //delay required to allow UI to repaint with activity indicator.
-    return;
+    [self login];
 }
 
 

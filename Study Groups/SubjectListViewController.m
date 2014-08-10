@@ -10,6 +10,7 @@
 #import "SBJson.h"
 #import "SubjectListViewCell.h"
 #import "CourseListViewcontroller.h"
+#import "DatabaseCore.h";
 
 @interface SubjectListViewController ()
 
@@ -27,14 +28,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     _myActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    _myActivityIndicator.layer.backgroundColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4] CGColor];
-    _myActivityIndicator.frame = CGRectMake(0, 0, 50, 50);
-    _myActivityIndicator.center = CGPointMake(self.view.frame.size.width / 2.0, (self.view.frame.size.height / 2.0) - 40);
+    _myActivityIndicator.layer.backgroundColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5] CGColor];
+    _myActivityIndicator.layer.cornerRadius = 10.0f;
+    _myActivityIndicator.frame = CGRectMake(0, 0, 55, 55);
+    _myActivityIndicator.center = CGPointMake(self.view.frame.size.width / 2.0, (self.view.frame.size.height / 2.0));
     [self.view addSubview: _myActivityIndicator];
     
-    [self showActivityIndicator];
-    [self performSelector: @selector(getSubjectList) withObject:nil afterDelay:0.0001]; //delay required to allow UI to repaint with activity indicator.
+    [self getSubjectList];
 
 }
 
@@ -56,39 +58,33 @@
 
 #pragma mark - Retrieve data
 
-//TODO: add activity indicator somewhere
+-(void) getSubjectListCompletionHandler: (NSURLResponse *)response data:(NSData *)data error:(NSError *) error {
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    
+    [self hideActivityIndicator];
+    
+    if ([httpResponse statusCode] < 200 || [httpResponse statusCode] >= 300) {
+        NSLog(@"Error: %@ || Status Code: %d", error, [httpResponse statusCode]);
+        return;
+    }
+    
+    NSString *responseData = [[NSString alloc] initWithData: data encoding:NSUTF8StringEncoding];
+    SBJsonParser *jsonParser = [SBJsonParser new];
+    NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
+    _mySubjectList = [[[[[jsonData objectForKey:@"scc_lov_resp"] objectForKey:@"lovs"] objectForKey:@"lov"] objectForKey: @"values"] objectForKey:@"value"];
+
+    [self.tableView reloadData];
+}
+
 - (void) getSubjectList {
+    [self showActivityIndicator];
+    
     @try {
-        NSURL *url = [NSURL URLWithString:@"https://streamer.oit.duke.edu/curriculum/list_of_values/fieldname/SUBJECT?access_token=a90cec76bce0a30d4a53aca6ca780448"];
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setURL: url];
-    
-        NSError *error = [[NSError alloc] init];
-        NSHTTPURLResponse *response = nil;
-        NSData *urlData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        NSLog(@"Response code: %d", [response statusCode]); //DEBUG
-    
-        if ([response statusCode] >= 200 && [response statusCode] < 300) {
-            NSString *responseData = [[NSString alloc] initWithData: urlData encoding:NSUTF8StringEncoding];
-            //NSLog(@"Response ==> %@", responseData); //DEBUG
-            SBJsonParser *jsonParser = [SBJsonParser new];
-            NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
-            //NSLog(@"%@", jsonData); //DEBUG
-            NSArray *subjectData = [[[[[jsonData objectForKey:@"scc_lov_resp"] objectForKey:@"lovs"] objectForKey:@"lov"] objectForKey: @"values"] objectForKey:@"value"];
-            //NSLog(@"%@", subjectData); //DEBUG
-            _mySubjectList = subjectData;
-        }
-        else {
-            if (error) {NSLog(@"Error: %@", error);}
-            NSLog(@"Connection failed!");
-            _mySubjectList = nil;
-        }
-        [self.tableView reloadData];
-    }
-    @catch (NSException *e) {
+        [DatabaseCore getSubjectList: ^(NSURLResponse *response, NSData *data, NSError *error) {
+            [self getSubjectListCompletionHandler:response data:data error:error];
+        }];
+    } @catch (NSException *e) {
         NSLog(@"Exception: %@", e); //DEBUG
-    }
-    @finally {
         [self hideActivityIndicator];
     }
 }
