@@ -11,7 +11,7 @@
 @implementation DatabaseCore
 
 static const NSString *DATABASE_URL_ROOT = @"http://colab-sbx-68.oit.duke.edu";
-static const NSString *LOGIN_VALIDATION_URL_EXTENSION = @"validate_login.php";
+static const NSString *LOGIN_VALIDATION_URL_EXTENSION = @"php/validate_login.php";
 
 static const NSString *DUKE_OIT_URL_ROOT = @"https://streamer.oit.duke.edu";
 static const NSString *DUKE_OIT_ACCESS_TOKEN = @"a90cec76bce0a30d4a53aca6ca780448";

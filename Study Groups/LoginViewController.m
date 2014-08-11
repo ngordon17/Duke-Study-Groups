@@ -89,6 +89,8 @@
 -(void) validateLoginCompletionHandler: (NSURLResponse *)response data:(NSData *)data error:(NSError *) error {
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
     
+    NSLog(@"status code = %d", [httpResponse statusCode]);
+    
     [self hideActivityIndicator];
     
     if ([httpResponse statusCode] < 200 || [httpResponse statusCode] >= 300) {
@@ -101,6 +103,8 @@
     SBJsonParser *jsonParser = [SBJsonParser new];
     NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
     NSInteger success = [(NSNumber *) [jsonData objectForKey:@"success"] integerValue];
+    
+    NSLog(@"success = %d", success);
     
     if (success != 1) {
         [self alertStatus:[jsonData objectForKey:@"error_message"] :@"Login Failed!"];
@@ -127,9 +131,7 @@
         NSLog(@"Exception: %@", e);
         [self hideActivityIndicator];
         [self alertStatus:@"Login failed." :@"Login failed!"];
-        
     }
-    [self performSegueWithIdentifier:@"login-segue" sender:self];
 }
 
 -(IBAction) loginClicked:(UIButton *) sender {
